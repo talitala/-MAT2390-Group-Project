@@ -78,6 +78,8 @@ vector<bool> transmitter() {
 //MAIN
 int main()
 {
+    srand(time(0));
+
    //1.) Take N from user
     int n = 0;
     cout << "Please type in N, a number between 1 and 100." << endl;
