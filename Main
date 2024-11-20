@@ -1,0 +1,97 @@
+// (MAT239) Group Project.cpp : This file contains the 'main' function. Program execution begins and ends there.
+//
+
+#include <iostream>
+#include <vector>
+#include <cstdlib>
+#include <ctime>
+using namespace std;
+
+//FUNCTIONS
+
+//Transmitter Tx/RX Function
+vector<bool> transmitter() {
+    int sum = 0;
+    string result; 
+    //RANDOMIZING 8 BITS
+    int randomNum = rand() % 256;    // Generate a random 8-bit number (0 to 255)
+    cout << "Random Number (Transmitted): " << randomNum << endl;     // Display the random number for reference
+
+    vector<bool> bits(8);    // Create a vector to store the 8 bits
+
+    //  Extract each bit and store it in the vector
+    for (int i = 0; i < 8; i++) {
+        bits[i] = (randomNum >> i) & 1;  // Extract bit as 0 or 1
+    }
+
+    //ACK BIT
+    bits.push_back(0);  // Add a 0 at the end, ACK Bit
+
+    //FINDING CHECKSUM BIT
+    //   Find sum of integers in list
+    for (int i = 0; i < 8; i++) {
+        sum += bits[i];
+    }
+
+    //   Check if sum is even or odd
+    if (sum % 2 == 0) { // Even = 0
+        bits.push_back(0);
+    }
+    else {
+        bits.push_back(1); // Odd = 1
+    }
+
+    //   For each bit in the list, add it to a string for printing
+    for (int i = 0; i < bits.size(); i++) {
+        if (bits[i] == 1) {
+            result += "1";  // Append '1' if the bit is 1
+        }
+        else {
+            result += "0";  // Append '0' if the bit is 0
+        }
+    }
+
+    cout << "Number as 10 Bits: " << result << endl;     // Display the random number for reference
+    return bits;    // Return the vector of bits
+}
+
+//NOISY CHANNEL
+//move through noisy channel. Apply based on N%. if to be applied, determine randomly with N%(?) which bit to flip
+
+
+
+//RX/TX FUNCTION
+//if same checksum, no action
+//if diff checksum, retramnsmit by flipping ack bit and checksum and send back. goes through noise again... ack flips
+
+
+//EVALUATOR
+//record original signal
+//record when and where applied
+//record if error detected & if retransmitted
+//corrected signal recieved & verified
+//incorrect verify
+//caluclate performance statstics to evaluate similation finc and error correction performance
+
+
+
+//MAIN
+int main()
+{
+   //1.) Take N from user
+    int n = 0;
+    cout << "Please type in N, a number between 1 and 100." << endl;
+    cin >> n;
+
+    //2.) Call TxRx/Transmitter
+    vector<bool> transmittedBits = transmitter();// Call the transmitter function to get the 8 random bits
+
+    //3.) move through noise
+    
+    //4.) call RXTX
+    //5.) blah blah
+    //6.) Evaluate
+
+
+
+}
