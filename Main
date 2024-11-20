@@ -19,9 +19,9 @@ vector<bool> transmitter() {
 
     vector<bool> bits(8);    // Create a vector to store the 8 bits
 
-    //  Extract each bit and store it in the vector
+    // Extract each bit and store it in MSB-first order
     for (int i = 0; i < 8; i++) {
-        bits[i] = (randomNum >> i) & 1;  // Extract bit as 0 or 1
+        bits[7 - i] = (randomNum >> i) & 1;  // Extract bit and store in reverse order
     }
 
     //ACK BIT
@@ -41,15 +41,12 @@ vector<bool> transmitter() {
         bits.push_back(1); // Odd = 1
     }
 
-    //   For each bit in the list, add it to a string for printing
-    for (int i = 0; i < bits.size(); i++) {
-        if (bits[i] == 1) {
-            result += "1";  // Append '1' if the bit is 1
-        }
-        else {
-            result += "0";  // Append '0' if the bit is 0
-        }
+
+    // Create a binary string representation
+    for (bool bit : bits) {
+        result += (bit ? "1" : "0");
     }
+
 
     cout << "Number as 10 Bits: " << result << endl;     // Display the random number for reference
     return bits;    // Return the vector of bits
@@ -78,6 +75,7 @@ vector<bool> transmitter() {
 //MAIN
 int main()
 {
+
     srand(time(0));
 
    //1.) Take N from user
